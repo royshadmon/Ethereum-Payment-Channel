@@ -1,0 +1,9 @@
+# ignore all logs
+*.iml
+*.xml
+*.name
+*.swp
+*.class
+Ethereum-Payment-Channel/PaymentChannel/node_modules/.cache/*
+Ethereum-Payment-Channel/node_modules/.cache/*
+PaymentChannel/node_modules/*
