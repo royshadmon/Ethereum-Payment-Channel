@@ -6,4 +6,4 @@
 *.class
 Ethereum-Payment-Channel/PaymentChannel/node_modules/.cache/*
 Ethereum-Payment-Channel/node_modules/.cache/*
-PaymentChannel/node_modules/*
+PaymentChannel/node_modules/**

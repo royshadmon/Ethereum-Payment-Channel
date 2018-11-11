@@ -28,6 +28,10 @@ contract MetaCoin {
 		return ConvertLib.convert(getBalance(addr),2);
 	}
 
+	function getBalance2 (address addy) public view returns (uint) {
+        return addy.balance; 
+    }
+
 	function getBalance(address addr) public view returns(uint) {
 		return balances[addr];
 	}

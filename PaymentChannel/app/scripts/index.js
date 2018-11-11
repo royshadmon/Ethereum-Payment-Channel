@@ -11,18 +11,27 @@ import metaCoinArtifact from '../../build/contracts/MetaCoin.json'
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 const MetaCoin = contract(metaCoinArtifact)
 
+
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
 // For application bootstrapping, check out window.addEventListener below.
 let accounts
 let account
 
+let account_one 
+
+
+
+
+
+//---------------------------------MetaCoin Contract-------------------------//
 const App = {
   start: function () {
     const self = this
 
     // Bootstrap the MetaCoin abstraction for Use.
     MetaCoin.setProvider(web3.currentProvider)
+    
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function (err, accs) {
@@ -46,6 +55,23 @@ const App = {
   setStatus: function (message) {
     const status = document.getElementById('status')
     status.innerHTML = message
+  },
+
+  getBalance2: function () {
+    const self = this
+    const account_one = document.getElementById('address').value
+    let meta 
+    MetaCoin.deployed().then(function (instance) {
+      meta = instance
+      return meta.getBalance2.call(account_one, { from: account })
+    }).then(function (value) {
+      const balance2 = document.getElementById('newBalance')
+      self.setStatus('Success')
+      balance2.innerHTML = value.valueOf()
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus('Error getting new balance.')
+    })
   },
 
   refreshBalance: function () {

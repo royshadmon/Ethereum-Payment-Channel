@@ -1,8 +1,0 @@
-# ignore all logs
-*.iml
-*.xml
-*.name
-*.swp
-*.class
-PaymentChannel/node_modules/.cache/*
-node_modules/.cache/*
