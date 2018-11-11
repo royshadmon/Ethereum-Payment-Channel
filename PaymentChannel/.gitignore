@@ -5,3 +5,4 @@
 *.swp
 *.class
 PaymentChannel/node_modules/.cache/*
+node_modules/.cache/*
