@@ -2,7 +2,7 @@ pragma solidity ^0.4.20;
 
 import './mortal.sol';
 
-contract SecureSpending is mortal {
+contract SecurePayment is mortal {
     
   // mapping(address => Permission) mySenderList;
   // mapping(address => Receiver) myReceiverList;
@@ -36,6 +36,10 @@ contract SecureSpending is mortal {
   // function removeAddressFromReceiverList(address notPermitted) public onlyOwner {
   //     delete myReceiverList[notPermitted];
   // }
+
+  function () public payable {
+      
+  }
   
   function sendFunds(address receiver, uint amountInWei) public {
         // require(mySenderList[msg.sender].isAllowed);
@@ -48,11 +52,9 @@ contract SecureSpending is mortal {
         return msg.sender;
     }
 
-    function getBalance (address addy) public view returns (uint256) {
+    function getBalance (address addy) public view returns (uint) {
         return addy.balance; 
     }
   
-  function () public payable {
-      
-  }
+
 }

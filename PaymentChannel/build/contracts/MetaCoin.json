@@ -2768,12 +2768,12 @@
     "4447": {
       "events": {},
       "links": {
-        "ConvertLib": "0x82d50ad3c1091866e258fd0f1a7cc9674609d254"
+        "ConvertLib": "0x4a5cd58b24e3bf04360b06bfeaf45a39aa8035b6"
       },
-      "address": "0xdda6327139485221633a1fcd65f4ac932e60a2e1",
-      "transactionHash": "0x048ff4d02d1215df8992e2f6d9a2ee0fd0d89e43d49e2d000832f8a45608b1cf"
+      "address": "0x4eee4559bd589b1cdfc419f0eed2ff9cbd47f439",
+      "transactionHash": "0xfb2ba7f95d9d7495a3b81bc6553a605d1a34dc1866c922f009f05dab6b2cc5f4"
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-11-11T20:54:45.783Z"
+  "updatedAt": "2018-11-17T21:18:45.739Z"
 }

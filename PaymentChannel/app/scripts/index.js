@@ -8,8 +8,11 @@ import { default as contract } from 'truffle-contract'
 // Import our contract artifacts and turn them into usable abstractions.
 import metaCoinArtifact from '../../build/contracts/MetaCoin.json'
 
+import securePaymentArtifact from '../../build/contracts/SecurePayment.json'
+
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 const MetaCoin = contract(metaCoinArtifact)
+const Payment = contract(securePaymentArtifact)
 
 
 // The following code is simple to show off interacting with your contracts.
@@ -31,7 +34,7 @@ const App = {
 
     // Bootstrap the MetaCoin abstraction for Use.
     MetaCoin.setProvider(web3.currentProvider)
-    
+    Payment.setProvider(web3.currentProvider)
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function (err, accs) {
@@ -52,6 +55,43 @@ const App = {
     })
   },
 
+  sendFunds: function () {
+    const self = this
+    const recipient = document.getElementById('address').value
+    const amount = parseInt(document.getElementById('amountInWei').value)
+    let secure
+    Payment.deployed().then(function (instance) {
+      secure = instance
+      console.log(secure)
+      return secure.sendFunds(recipient, amount, { from: account })
+    }).then(function (value) {
+      const balance2 = document.getElementById('newBalance')
+      self.setStatus('new function works yeee')
+      balance2.innerHTML = value.valueOf()
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus('Error with new function')
+    })
+  },
+
+  getBalance3: function () {
+    const self = this
+    const account_one = document.getElementById('address').value
+    let secure 
+    Payment.deployed().then(function (instance) {
+      secure = instance
+      return secure.getBalance.call(account_one, { from: account })
+    }).then(function (value) {
+      const balance2 = document.getElementById('newBalance')
+      self.setStatus('Success')
+      balance2.innerHTML = value.valueOf()
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus('Error getting new balance.')
+    })
+  },
+
+
   setStatus: function (message) {
     const status = document.getElementById('status')
     status.innerHTML = message
@@ -63,7 +103,7 @@ const App = {
     let meta 
     MetaCoin.deployed().then(function (instance) {
       meta = instance
-      return meta.getBalance2.call(account_one, { from: account })
+      return meta.getBalance2.call(account_one, { from: account_one })
     }).then(function (value) {
       const balance2 = document.getElementById('newBalance')
       self.setStatus('Success')
@@ -82,13 +122,18 @@ const App = {
       meta = instance
       return meta.getBalance.call(account, { from: account })
     }).then(function (value) {
+      console.log(value)
       const balanceElement = document.getElementById('balance')
       balanceElement.innerHTML = value.valueOf()
+      
+      const user = document.getElementById('account')
+      user.innerHTML = account.valueOf()
     }).catch(function (e) {
       console.log(e)
       self.setStatus('Error getting balance; see log.')
     })
   },
+
 
   sendCoin: function () {
     const self = this
