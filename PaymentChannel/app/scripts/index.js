@@ -26,7 +26,6 @@ let account_one
 
 
 
-
 //---------------------------------MetaCoin Contract-------------------------//
 const App = {
   start: function () {
@@ -54,6 +53,51 @@ const App = {
       self.refreshBalance()
     })
   },
+
+  getRandomNumber: function () {
+    const self = this
+
+    let num = Math.floor((Math.random() * 36) + 0);
+    let randRedBlack = Math.floor((Math.random() * 36) + 0)
+    
+    document.getElementById('num').innerHTML = num
+
+    let color = document.getElementById('redOrBlack')
+    let color2 = document.getElementById('redOrBlack')
+
+    if (randRedBlack % 2 == 0) {
+      color = "Red"
+      color2.innerHTML = "Red"
+    }
+    else {
+      color = "Black"
+      color2.innerHTML = "Black"
+    }
+
+    if (num % 2 == 0) {
+      document.getElementById('evenOrOdd').innerHTML = "Even"
+    }
+    else {
+      document.getElementById('evenOrOdd').innerHTML = "Odd"
+    }
+
+    self.checkResults(color)
+
+
+  },
+
+  checkResults: function (colorAns) {
+    const self = this
+
+    const color = document.getElementById('color').value
+    console.log(color)
+    console.log(colorAns)
+
+    if (color == colorAns) {
+      alert("you win")
+    }
+  },
+
 
   sendFunds: function () {
     const self = this

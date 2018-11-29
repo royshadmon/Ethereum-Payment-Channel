@@ -37,7 +37,7 @@ contract SecurePayment is mortal {
   //     delete myReceiverList[notPermitted];
   // }
 
-  function () public payable {
+  function () external payable {
       
   }
   
