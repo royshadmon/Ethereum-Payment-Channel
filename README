@@ -1,0 +1,10 @@
+To start the server:
+
+Terminal 1:
+cd Ethereum-Payment-Channel/PaymentChannel
+npm run dev
+
+Terminal 2:
+cd Ethereum-Payment-Channel/PaymentChannel
+truffle develop 
+migrate --reset
