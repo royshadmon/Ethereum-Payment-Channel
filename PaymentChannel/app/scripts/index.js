@@ -10,6 +10,7 @@ import metaCoinArtifact from '../../build/contracts/MetaCoin.json'
 
 import securePaymentArtifact from '../../build/contracts/SecurePayment.json'
 
+
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 const MetaCoin = contract(metaCoinArtifact)
 const Payment = contract(securePaymentArtifact)
@@ -224,7 +225,7 @@ window.addEventListener('load', function () {
       ' More info here: http://truffleframework.com/tutorials/truffle-and-metamask'
     )
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'))
+    window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'))
   }
 
   App.start()
