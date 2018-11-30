@@ -8,3 +8,10 @@ Terminal 2:
 cd Ethereum-Payment-Channel/PaymentChannel
 truffle develop 
 migrate --reset
+
+
+Jihua -> To add your changes
+
+git add .
+git commit -am"[What you did in a message]" 
+git push origin jiahua
