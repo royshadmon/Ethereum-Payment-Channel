@@ -98,8 +98,8 @@ contract GambleOnChain is mortal {
         return this;
     }
     
-    function getBettorBalance (address addy) public view returns (uint) {
-        return BettorList[addy].balance; 
+    function getBettorBalance () public view returns (uint) {
+        return BettorList[msg.sender].balance; 
     }
     
     function getCasinoBalance () public view returns (uint) {

@@ -9,11 +9,13 @@ import { default as contract } from 'truffle-contract'
 import metaCoinArtifact from '../../build/contracts/MetaCoin.json'
 
 import securePaymentArtifact from '../../build/contracts/SecurePayment.json'
+import gambleOnChainArtifcat from '../../build/contracts/GambleOnChain.json'
 
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 const MetaCoin = contract(metaCoinArtifact)
 const Payment = contract(securePaymentArtifact)
+const Gamble = contract(gambleOnChainArtifcat)
 
 
 // The following code is simple to show off interacting with your contracts.
@@ -35,6 +37,7 @@ const App = {
     // Bootstrap the MetaCoin abstraction for Use.
     MetaCoin.setProvider(web3.currentProvider)
     Payment.setProvider(web3.currentProvider)
+    Gamble.setProvider(web3.currentProvider)
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function (err, accs) {
@@ -47,12 +50,48 @@ const App = {
         alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.")
         return
       }
-
       accounts = accs
       account = accounts[0]
 
       self.refreshBalance()
     })
+  },
+
+  addFunds: function () {
+    const self = this 
+
+    let amount = 2500000000000000000
+    let gamble
+
+    Gamble.deployed().then(function (instance) {
+      gamble = instance
+      console.log(gamble)
+      return gamble.addFunds( {from: account, value: 2500000000000000000})
+    }).then(function (value) {
+      self.setStatus('successfully added funds')
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus('Error adding 2.5 ether')
+    })
+  },
+
+  getBettorBalance: function () {
+    const self = this 
+
+    let balance = document.getElementById('casino')
+    let gamble
+
+    Gamble.deployed().then(function (instance) {
+      gamble = instance
+      return gamble.getBettorBalance({ from: account })
+    }).then(function (value) {      
+      self.setStatus('new function works yeee')
+      balance.innerHTML = value.valueOf()
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus('Error with new function')
+    })
+
   },
 
   getRandomNumber: function () {
@@ -225,7 +264,7 @@ window.addEventListener('load', function () {
       ' More info here: http://truffleframework.com/tutorials/truffle-and-metamask'
     )
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'))
+    window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'))
   }
 
   App.start()
