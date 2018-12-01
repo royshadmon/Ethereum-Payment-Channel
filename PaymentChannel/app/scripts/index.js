@@ -78,7 +78,7 @@ const App = {
   getBettorBalance: function () {
     const self = this 
 
-    let balance = document.getElementById('casino')
+    let balance = document.getElementById('gambler')
     let gamble
 
     Gamble.deployed().then(function (instance) {
@@ -93,6 +93,69 @@ const App = {
     })
 
   },
+
+  getCasinoBalance: function () {
+    const self = this
+
+    let balance = document.getElementById('casino')
+    let gamble
+    Gamble.deployed().then(function (instance) {
+      gamble = instance
+      return gamble.getCasinoBalance( {from: account })
+    }).then(function (value) {
+      balance.innerHTML = value.valueOf()
+      self.setStatus('Successfully got casino balance')
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus('Failed to get Casino balance')
+    })
+  },
+
+
+  getContractAddress: function () {
+    const self = this 
+    let address = document.getElementById('contractAddress')
+    let gamble 
+    Gamble.deployed().then(function (instance) {
+      gamble = instance
+      return gamble.getContractAddress( { from: account })
+    }).then(function (value) {
+      address.innerHTML = value.valueOf()
+      self.setStatus('Got contract address')
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus('Failed to get contract address')
+    })
+
+  },
+
+  gambleOnRed: function () {
+    self = this
+    const color = document.getElementById('redOrBlack').innerText
+    const bet = parseInt(document.getElementById('bet').value)
+    const win = this.checkResults(color)
+    console.log("color ", color)
+    console.log("bet ", bet)
+    console.log("win ", win)
+    let gamble
+    Gamble.deployed().then(function (instance) {
+      gamble = instance 
+      return gamble.betOnPayoutTwo(bet, win, { from: account })
+    }).then(function(value) {
+      self.setStatus("Your gamble was successfully processed")
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus("Your gamble failed to process")
+    })
+
+    },
+
+  gamble: function () {
+    self = this
+    this.getRandomNumber()
+    this.gambleOnRed()
+  },
+  
 
   getRandomNumber: function () {
     const self = this
@@ -128,14 +191,14 @@ const App = {
 
   checkResults: function (colorAns) {
     const self = this
-
     const color = document.getElementById('color').value
     console.log(color)
     console.log(colorAns)
 
     if (color == colorAns) {
-      alert("you win")
+      return true
     }
+    else return false
   },
 
 
@@ -224,7 +287,7 @@ const App = {
 
     const amount = parseInt(document.getElementById('amount').value)
     const receiver = document.getElementById('receiver').value
-
+    console.log("receiver ", receiver)
     this.setStatus('Initiating transaction... (please wait)')
 
     let meta

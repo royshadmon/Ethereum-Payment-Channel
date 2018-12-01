@@ -12,7 +12,7 @@
 <body>
   <h1>Roulette</h1>
   <label for="number">Random seed</label>
-  <button id="getRandomNumber" onclick="App.getRandomNumber()">Get Random Number</button>
+  <button id="getRandomNumber" onclick="App.gamble()">Get Random Number</button>
   <h3>The number is <span class="black"><span id="num"></span> <span id="evenOrOdd"></span> <span id="redOrBlack"></span></span></h3> 
 
   <label for="color">Color to Bet on</label><input type="text" id="color" placeholder="Red || Black">
@@ -21,9 +21,16 @@
 
 
 <button id="getBettorBalance" onclick="App.getBettorBalance()">See Bettor Balance</button>
-  <h3>The balance is <span class="black"><span id="casino"></span></h3> 
+  <h3>The balance is <span class="black"><span id="gambler"></span></h3> 
+<br>
+<button id="getBettorBalance" onclick="App.getCasinoBalance()">See Casino Balance</button>
+  <h3>The balance of the Casino is <span class="black"><span id="casino"></span></h3> 
+<br>
 <br>
   <button id="getBettorBalance" onclick="App.addFunds()">Send 2.5 Ether</button>
+  <br>
+  <button id="getContractAddress" onclick="App.getContractAddress()">Get Contract Address</button>
+  <h3>The contract address is <span class="black"><span id="contractAddress"></span></h3> 
 
   
   <br><br><br>

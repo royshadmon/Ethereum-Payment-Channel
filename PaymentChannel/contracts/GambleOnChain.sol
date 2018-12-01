@@ -7,11 +7,12 @@ contract GambleOnChain is mortal {
   mapping(address => Bet) BettorList;
   mapping(address => bool) Exists;
   
-  uint CasinoBalance = address(this).balance;
+  uint CasinoLosses = 0;
   
   
   event senderAndAmount(address senderAddress, uint amountInWei);
   
+  event newAddressAddedToSenderList(address thePersonAddeed, address theNewAddress, uint maxAmountCanTransfer);
   event newBettor(address newBettor, uint balance);
   event oldBettor(address oldBettor, uint newBalance);
   
@@ -44,20 +45,20 @@ contract GambleOnChain is mortal {
   } 
   
   // winning even/odd or red/black bet
-  function betOnPayout2 (uint bet, bool win) private {
+  function betOnPayoutTwo (uint bet, bool win) public payable {
       if (bet > BettorList[msg.sender].balance) {
-          revert("You don't have enough money in your account to bet that much");
+          revert("You dont have enough money in your account to bet that much");
       }
-      if (bet * 2 > CasinoBalance/10) {
-          revert("Casino can't afford to take your bet");
+      if (bet * 2 > address(this).balance/10) {
+          revert("Casino cant afford to take your bet");
       }
       if (win) {
         BettorList[msg.sender] = Bet(BettorList[msg.sender].balance + bet*2); 
-        CasinoBalance -= bet * 2;
+        CasinoLosses += bet * 2;
       }
       else {
         BettorList[msg.sender] = Bet(BettorList[msg.sender].balance - bet);  
-        CasinoBalance += bet;
+        CasinoLosses -= bet;
       }
       
   }
@@ -81,9 +82,9 @@ contract GambleOnChain is mortal {
             removeBettorFromList(msg.sender);
         }
         
-  }  
+    }  
   
-    function removeBettorFromList (address bettor) private {
+    function removeBettorFromList (address bettor) public {
         delete BettorList[bettor];
         delete Exists[bettor];
     }  
@@ -103,7 +104,7 @@ contract GambleOnChain is mortal {
     }
     
     function getCasinoBalance () public view returns (uint) {
-        return CasinoBalance;
+        return address(this).balance;
     } 
     
     
