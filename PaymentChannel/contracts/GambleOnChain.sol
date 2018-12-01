@@ -104,7 +104,7 @@ contract GambleOnChain is mortal {
     }
     
     function getCasinoBalance () public view returns (uint) {
-        return address(this).balance;
+        return address(this).balance - CasinoLosses;
     } 
     
     
