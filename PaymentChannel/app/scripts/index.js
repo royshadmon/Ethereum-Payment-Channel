@@ -68,6 +68,8 @@ const App = {
       console.log(gamble)
       return gamble.addFunds( {from: account, value: 2500000000000000000})
     }).then(function (value) {
+      self.getBettorBalance()
+      self.getCasinoBalance()
       self.setStatus('successfully added funds')
     }).catch(function (e) {
       console.log(e)
@@ -127,6 +129,23 @@ const App = {
       self.setStatus('Failed to get contract address')
     })
 
+  },
+
+  withdrawFunds: function () {
+    const self = this
+    let amount = parseInt(document.getElementById('withdraw').value)
+    let gamble 
+    Gamble.deployed().then(function (instance) {
+      gamble = instance
+      return gamble.withdrawMoney(amount, {from: account})
+    }).then(function (value) {
+      self.getCasinoBalance()
+      self.getBettorBalance()
+      self.setStatus("Withdraw Successful")
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus('Failed to withdraw funds')
+    })
   },
 
   gambleOnRed: function () {

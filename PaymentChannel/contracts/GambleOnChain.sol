@@ -70,10 +70,10 @@ contract GambleOnChain is mortal {
   
   function withdrawMoney (uint amountInWei) public payable {
         if (Exists[msg.sender] == false) {
-            revert("You're not allowed to make a transaction");
+            revert("Youre not allowed to make a transaction");
         }
         if (amountInWei > BettorList[msg.sender].balance && amountInWei > address(this).balance) {
-            revert("You don't have that much money to withdraw");
+            revert("You dont have that much money to withdraw");
         }
         BettorList[msg.sender].balance -= amountInWei;
         msg.sender.transfer(amountInWei);
