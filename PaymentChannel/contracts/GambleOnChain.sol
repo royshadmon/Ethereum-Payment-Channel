@@ -46,6 +46,9 @@ contract GambleOnChain is mortal {
   
   // winning even/odd or red/black bet
   function betOnPayoutTwo (uint bet, bool win) public payable {
+      if (!Exists[msg.sender]) {
+          revert("You dont have an account");
+      }
       if (bet > BettorList[msg.sender].balance) {
           revert("You dont have enough money in your account to bet that much");
       }
@@ -62,11 +65,25 @@ contract GambleOnChain is mortal {
       }
       
   }
-    // function winPayout35 (address winner, uint bet) private {
-    //     if (Exists[winner]) {
-    //         BettorList[winner].balance += (bet * 35);
-    //     }
-    // }  
+    function payout35 (uint bet, bool win) internal payable {
+        if (!Exists[msg.sender]) {
+          revert("You dont have an account");
+        } 
+        if (bet > BettorList[msg.sender].balance) {
+            revert("You dont have enough money in your account to bet that much");
+        }
+        if (bet * 35 > address(this).balance/10) {
+            revert("Casino cant afford to take your bet");
+        }
+        if (win) {
+            BettorList[msg.sender].balance += (bet * 35);
+            CasinoLosses += bet * 35;
+        }
+        else {
+            BettorList[msg.sender] = Bet(BettorList[msg.sender].balance - bet);  
+            CasinoLosses -= bet;  
+        }
+    }  
   
   function withdrawMoney (uint amountInWei) public payable {
         if (Exists[msg.sender] == false) {

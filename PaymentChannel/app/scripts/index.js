@@ -150,9 +150,9 @@ const App = {
 
   gambleOnRed: function () {
     self = this
-    const color = document.getElementById('redOrBlack').innerText
-    const bet = parseInt(document.getElementById('bet').value)
-    const win = this.checkResults(color)
+    const color = document.getElementById('casinoRedBlack').innerText
+    const bet = parseInt(document.getElementById('bettorBet').value)
+    const win = this.checkColorResults(color)
     console.log("color ", color)
     console.log("bet ", bet)
     console.log("win ", win)
@@ -161,20 +161,79 @@ const App = {
       gamble = instance 
       return gamble.betOnPayoutTwo(bet, win, { from: account })
     }).then(function(value) {
+      self.getCasinoBalance()
+      self.getBettorBalance()
       self.setStatus("Your gamble was successfully processed")
     }).catch(function (e) {
       console.log(e)
       self.setStatus("Your gamble failed to process")
     })
 
-    },
+  },
 
-  gamble: function () {
+  evenOddResult: function () {
+    self = this
+    const evenOrOdd = document.getElementById('casinoEvenOdd').innerText
+    const bet = parseInt(document.getElementById('bettorBet').value)
+    const win = this.checkEvenOddResults(evenOrOdd)
+    console.log("even or odd ", evenOrOdd)
+    console.log("bet ", bet)
+    console.log("win ", win)
+    let gamble
+    Gamble.deployed().then(function (instance) {
+      gamble = instance 
+      return gamble.betOnPayoutTwo(bet, win, { from: account })
+    }).then(function(value) {
+      self.getCasinoBalance()
+      self.getBettorBalance()
+      self.setStatus("Your gamble was successfully processed")
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus("Your gamble failed to process")
+    })
+
+  },
+
+  numberResult: function () {
+    self = this
+    const casinoNumber = document.getElementById('casinoNumber').innerText
+    const bet = parseInt(document.getElementById('bettorBet').value)
+    const win = this.checkNumResults(casinoNumber)
+    console.log("Casino Number ", casinoNumber)
+    console.log("bet ", bet)
+    console.log("win ", win)
+    let gamble
+    Gamble.deployed().then(function (instance) {
+      gamble = instance 
+      return gamble.payout35(bet, win, { from: account })
+    }).then(function(value) {
+      self.getCasinoBalance()
+      self.getBettorBalance()
+      self.setStatus("Your gamble was successfully processed")
+    }).catch(function (e) {
+      console.log(e)
+      self.setStatus("Your gamble failed to process")
+    })
+
+  },
+
+  gambleOnColor: function () {
     self = this
     this.getRandomNumber()
     this.gambleOnRed()
   },
   
+  gambleEvenOdd: function () {
+    self = this
+    this.getRandomNumber()
+    this.evenOddResult()
+  },
+
+  gambleOnNum: function () {
+    self = this
+    this.getRandomNumber()
+    this.numberResult()
+  },
 
   getRandomNumber: function () {
     const self = this
@@ -182,10 +241,10 @@ const App = {
     let num = Math.floor((Math.random() * 36) + 0);
     let randRedBlack = Math.floor((Math.random() * 36) + 0)
     
-    document.getElementById('num').innerHTML = num
+    document.getElementById('casinoNumber').innerHTML = num
 
-    let color = document.getElementById('redOrBlack')
-    let color2 = document.getElementById('redOrBlack')
+    let color = document.getElementById('casinoRedBlack')
+    let color2 = document.getElementById('casinoRedBlack')
 
     if (randRedBlack % 2 == 0) {
       color = "Red"
@@ -197,24 +256,48 @@ const App = {
     }
 
     if (num % 2 == 0) {
-      document.getElementById('evenOrOdd').innerHTML = "Even"
+      document.getElementById('casinoEvenOdd').innerHTML = "Even"
     }
     else {
-      document.getElementById('evenOrOdd').innerHTML = "Odd"
+      document.getElementById('casinoEvenOdd').innerHTML = "Odd"
     }
 
-    self.checkResults(color)
+    //self.checkResults(color)
 
 
   },
 
-  checkResults: function (colorAns) {
+  checkColorResults: function (colorAns) {
     const self = this
-    const color = document.getElementById('color').value
+    const color = document.getElementById('bettorColor').value
     console.log(color)
     console.log(colorAns)
 
     if (color == colorAns) {
+      return true
+    }
+    else return false
+  },
+
+  checkEvenOddResults: function (result) {
+    const self = this
+    const evenOdd = document.getElementById('bettorEvenOdd').value
+    console.log(evenOdd)
+    console.log(result)
+
+    if (evenOdd == result) {
+      return true
+    }
+    else return false
+  },
+
+  checkNumResults: function (result) {
+    const self = this
+    const num = document.getElementById('bettorNumber').value
+    console.log(num)
+    console.log(result)
+
+    if (num == result) {
       return true
     }
     else return false
@@ -280,25 +363,25 @@ const App = {
     })
   },
 
-  refreshBalance: function () {
-    const self = this
+  // refreshBalance: function () {
+  //   const self = this
 
-    let meta
-    MetaCoin.deployed().then(function (instance) {
-      meta = instance
-      return meta.getBalance.call(account, { from: account })
-    }).then(function (value) {
-      console.log(value)
-      const balanceElement = document.getElementById('balance')
-      balanceElement.innerHTML = value.valueOf()
+  //   let meta
+  //   MetaCoin.deployed().then(function (instance) {
+  //     meta = instance
+  //     return meta.getBalance.call(account, { from: account })
+  //   }).then(function (value) {
+  //     console.log(value)
+  //     const balanceElement = document.getElementById('balance')
+  //     balanceElement.innerHTML = value.valueOf()
       
-      const user = document.getElementById('account')
-      user.innerHTML = account.valueOf()
-    }).catch(function (e) {
-      console.log(e)
-      self.setStatus('Error getting balance; see log.')
-    })
-  },
+  //     const user = document.getElementById('account')
+  //     user.innerHTML = account.valueOf()
+  //   }).catch(function (e) {
+  //     console.log(e)
+  //     self.setStatus('Error getting balance; see log.')
+  //   })
+  // },
 
 
   sendCoin: function () {

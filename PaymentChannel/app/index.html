@@ -14,17 +14,19 @@
   <br>
   <h2>21+ Players only</h2>
   <br>
-  <button id="getRandomNumber" onclick="App.gamble()">Get Random Number</button>
-  <h3>The number is <span class="black"><span id="num"></span> <span id="evenOrOdd"></span> <span id="redOrBlack"></span></span></h3> 
+  <button id="gambleOnColor" onclick="App.gambleOnColor()">Gamble on Color</button>
+  <button id="gambleOnEvenOdd" onclick="App.gambleEvenOdd()">Gamble on Even or Odd</button>
+  <button id="gambleOnNumber" onclick="App.gambleOnNum()">Gamble on Number</button>
+  <h3>The number is <span class="black"><span id="casinoNumber"></span> <span id="casinoEvenOdd"></span> <span id="casinoRedBlack"></span></span></h3> 
 
-  <label for="color">Color to Bet</label><input type="text" id="color" placeholder="Red || Black">
+  <label for="bettorColor">Color Bet</label><input type="text" id="bettorColor" placeholder="Red || Black">
   <br>
-  <label for="evenOdd">Even or Odd Bet</label><input type="text" id="evenOdd">
+  <label for="bettorEvenOdd">Even or Odd Bet</label><input type="text" id="bettorEvenOdd">
   <br>
 
-  <label for="number">Number Bet</label><input type="text" id="number">
+  <label for="bettorNumber">Number Bet</label><input type="text" id="bettorNumber">
   <br>
-  <label for="bet">Amount to bet</label><input type="text" id="bet" placeholder="Wei">
+  <label for="bettorBet">Amount to bet</label><input type="text" id="bettorBet" placeholder="Wei">
   <br>
   <br>
 
