@@ -46,7 +46,9 @@ contract GambleOnChain is mortal {
   
   // winning even/odd or red/black bet
   function betOnPayoutTwo (uint bet, bool win) public payable {
-      checkExists();
+      if (!checkExists()) {
+        revert();
+      }
       if (bet > BettorList[msg.sender].balance) {
           revert("You dont have enough money in your account to bet that much");
       }
@@ -63,7 +65,7 @@ contract GambleOnChain is mortal {
       }
       
   }
-    function payout35 (uint bet, bool win) payable {
+    function payout35 (uint bet, bool win) public payable {
         checkExists();
         if (bet > BettorList[msg.sender].balance) {
             revert("You dont have enough money in your account to bet that much");

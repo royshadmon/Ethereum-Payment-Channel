@@ -244,18 +244,15 @@ const App = {
     const self = this
 
     let gamble
-
+    var result
     Gamble.deployed().then(function (instance) {
       gamble = instance
       return gamble.checkExists( {from: account })
     }).then(function (value) {
-      if (value) {
-        return true
-      }
-      else {
-        alert("You aren't authorized to make a transaction")
-        return false
-      }
+      self.setStatus("checkExists works")
+      console.log(value.valueOf())
+      console.log(value)
+      return value.valueOf()
     }).catch(function (e) {
       console.log(e)
     })
@@ -263,23 +260,37 @@ const App = {
 
 
   gambleOnColor: function () {
-    if (this.checkExists()) {
-      this.getRandomNumber()
-      this.gambleOnRed()
+    const self = this
+    const pass = function() {
+      self.checkExists()
+    }
+    
+    if (pass) {
+      self.getRandomNumber()
+      self.gambleOnRed()
     }
   },
   
   gambleEvenOdd: function () {
-    if (this.checkExists()) {
-      this.getRandomNumber()
-      this.evenOddResult()
+    const self = this
+
+    const pass = function() {
+      self.checkExists()
+    }
+    if (pass) {
+      self.getRandomNumber()
+      self.evenOddResult()
     }
   },
 
   gambleOnNum: function () {
-    if (this.checkExists()) {
-      this.getRandomNumber()
-      this.numberResult()
+    const self = this
+    const pass = function() {
+      self.checkExists()
+    }
+    if (pass) {
+      self.getRandomNumber()
+      self.numberResult()
     }
   },
 
