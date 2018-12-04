@@ -52,9 +52,11 @@ const App = {
       }
       accounts = accs
       account = accounts[0]
-
-      self.refreshBalance()
+      //self.refreshBalance()
     })
+
+  
+
   },
 
   addFunds: function () {
@@ -152,7 +154,14 @@ const App = {
     self = this
     const color = document.getElementById('casinoRedBlack').innerText
     const bet = parseInt(document.getElementById('bettorBet').value)
-    const win = this.checkColorResults(color)
+    const casinoNumber = document.getElementById('casinoNumber').innerText
+    var win
+    if (casinoNumber === 0) {
+      win = lose
+    }
+    else {
+      win = this.checkColorResults(color)  
+    }
     console.log("color ", color)
     console.log("bet ", bet)
     console.log("win ", win)
@@ -175,7 +184,15 @@ const App = {
     self = this
     const evenOrOdd = document.getElementById('casinoEvenOdd').innerText
     const bet = parseInt(document.getElementById('bettorBet').value)
-    const win = this.checkEvenOddResults(evenOrOdd)
+    const casinoNumber = document.getElementById('casinoNumber').innerText
+    var win
+    if (casinoNumber === 0) {
+      win = lose
+    }
+    else {
+      win = this.checkEvenOddResults(evenOrOdd)
+    }
+
     console.log("even or odd ", evenOrOdd)
     console.log("bet ", bet)
     console.log("win ", win)
@@ -198,7 +215,13 @@ const App = {
     self = this
     const casinoNumber = document.getElementById('casinoNumber').innerText
     const bet = parseInt(document.getElementById('bettorBet').value)
-    const win = this.checkNumResults(casinoNumber)
+    var win
+    if (casinoNumber === 0) {
+      win = false
+    }
+    else {
+      win = this.checkNumResults(casinoNumber)  
+    }
     console.log("Casino Number ", casinoNumber)
     console.log("bet ", bet)
     console.log("win ", win)
@@ -217,29 +240,54 @@ const App = {
 
   },
 
+  checkExists: function () {
+    const self = this
+
+    let gamble
+
+    Gamble.deployed().then(function (instance) {
+      gamble = instance
+      return gamble.checkExists( {from: account })
+    }).then(function (value) {
+      if (value) {
+        return true
+      }
+      else {
+        alert("You aren't authorized to make a transaction")
+        return false
+      }
+    }).catch(function (e) {
+      console.log(e)
+    })
+  },
+
+
   gambleOnColor: function () {
-    self = this
-    this.getRandomNumber()
-    this.gambleOnRed()
+    if (this.checkExists()) {
+      this.getRandomNumber()
+      this.gambleOnRed()
+    }
   },
   
   gambleEvenOdd: function () {
-    self = this
-    this.getRandomNumber()
-    this.evenOddResult()
+    if (this.checkExists()) {
+      this.getRandomNumber()
+      this.evenOddResult()
+    }
   },
 
   gambleOnNum: function () {
-    self = this
-    this.getRandomNumber()
-    this.numberResult()
+    if (this.checkExists()) {
+      this.getRandomNumber()
+      this.numberResult()
+    }
   },
 
   getRandomNumber: function () {
     const self = this
 
-    let num = Math.floor((Math.random() * 36) + 0);
-    let randRedBlack = Math.floor((Math.random() * 36) + 0)
+    let num = Math.floor((Math.random() * 37) + 0);
+    let randRedBlack = Math.floor((Math.random() * 37) + 0)
     
     document.getElementById('casinoNumber').innerHTML = num
 
