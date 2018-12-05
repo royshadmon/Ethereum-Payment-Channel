@@ -258,6 +258,13 @@ const App = {
     })
   },
 
+  gabmle: function (num) {
+    self = this
+
+
+    // if ()
+
+  },
 
   gambleOnColor: function () {
     const self = this
@@ -294,18 +301,21 @@ const App = {
     }
   },
 
-  getRandomNumber: function () {
+  getRandomNumber: function (num) {
     const self = this
 
-    let num = Math.floor((Math.random() * 37) + 0);
-    let randRedBlack = Math.floor((Math.random() * 37) + 0)
+    // let num = Math.floor((Math.random() * 37) + 0);
+    // let randRedBlack = Math.floor((Math.random() * 37) + 0)
     
-    document.getElementById('casinoNumber').innerHTML = num
+    //var num = parseInt(document.getElementById('casinoNumber').value)
+    console.log("the num is", num)
+    //document.getElementById('casinoNumber').innerHTML = num
 
     let color = document.getElementById('casinoRedBlack')
     let color2 = document.getElementById('casinoRedBlack')
 
-    if (randRedBlack % 2 == 0) {
+    // if (randRedBlack % 2 == 0) {
+      if (num % 2 == 0) {
       color = "Red"
       color2.innerHTML = "Red"
     }
@@ -363,106 +373,11 @@ const App = {
   },
 
 
-  sendFunds: function () {
-    const self = this
-    const recipient = document.getElementById('address').value
-    const amount = parseInt(document.getElementById('amountInWei').value)
-    let secure
-    Payment.deployed().then(function (instance) {
-      secure = instance
-      console.log(secure)
-      return secure.sendFunds(recipient, amount, { from: account })
-    }).then(function (value) {
-      const balance2 = document.getElementById('newBalance')
-      self.setStatus('new function works yeee')
-      balance2.innerHTML = value.valueOf()
-    }).catch(function (e) {
-      console.log(e)
-      self.setStatus('Error with new function')
-    })
-  },
-
-  getBalance3: function () {
-    const self = this
-    const account_one = document.getElementById('address').value
-    let secure 
-    Payment.deployed().then(function (instance) {
-      secure = instance
-      return secure.getBalance.call(account_one, { from: account })
-    }).then(function (value) {
-      const balance2 = document.getElementById('newBalance')
-      self.setStatus('Success')
-      balance2.innerHTML = value.valueOf()
-    }).catch(function (e) {
-      console.log(e)
-      self.setStatus('Error getting new balance.')
-    })
-  },
-
-
   setStatus: function (message) {
     const status = document.getElementById('status')
     status.innerHTML = message
-  },
-
-  getBalance2: function () {
-    const self = this
-    const account_one = document.getElementById('address').value
-    let meta 
-    MetaCoin.deployed().then(function (instance) {
-      meta = instance
-      return meta.getBalance2.call(account_one, { from: account_one })
-    }).then(function (value) {
-      const balance2 = document.getElementById('newBalance')
-      self.setStatus('Success')
-      balance2.innerHTML = value.valueOf()
-    }).catch(function (e) {
-      console.log(e)
-      self.setStatus('Error getting new balance.')
-    })
-  },
-
-  // refreshBalance: function () {
-  //   const self = this
-
-  //   let meta
-  //   MetaCoin.deployed().then(function (instance) {
-  //     meta = instance
-  //     return meta.getBalance.call(account, { from: account })
-  //   }).then(function (value) {
-  //     console.log(value)
-  //     const balanceElement = document.getElementById('balance')
-  //     balanceElement.innerHTML = value.valueOf()
-      
-  //     const user = document.getElementById('account')
-  //     user.innerHTML = account.valueOf()
-  //   }).catch(function (e) {
-  //     console.log(e)
-  //     self.setStatus('Error getting balance; see log.')
-  //   })
-  // },
-
-
-  sendCoin: function () {
-    const self = this
-
-    const amount = parseInt(document.getElementById('amount').value)
-    const receiver = document.getElementById('receiver').value
-    console.log("receiver ", receiver)
-    this.setStatus('Initiating transaction... (please wait)')
-
-    let meta
-    MetaCoin.deployed().then(function (instance) {
-      meta = instance
-      return meta.sendCoin(receiver, amount, { from: account })
-    }).then(function () {
-      self.setStatus('Transaction complete!')
-      self.refreshBalance()
-    }).catch(function (e) {
-      console.log(e)
-      self.setStatus('Error sending coin; see log.')
-    })
   }
+
 }
 
 window.App = App
