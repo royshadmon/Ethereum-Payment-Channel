@@ -283,12 +283,7 @@
                 // -------------------------------------------------------
                 function alertPrize(indicatedSegment)
                 {
-                    // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
-                    
-                    var winningSegmentNumber = theWheel.getIndicatedSegmentNumber();
-                    theWheel.segments[winningSegmentNumber].fillStyle = '#0198e1';
-                    theWheel.draw();
-                    // drawColourTriangle();
+                    // Do basic alert of the segment text. You would probably want to do something more interesting with this information.                                      
 
                     alert("You have won " + indicatedSegment.text);
                     const betType = checkInput();
