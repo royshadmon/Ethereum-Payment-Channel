@@ -258,14 +258,6 @@ const App = {
     })
   },
 
-  gabmle: function (num) {
-    self = this
-
-
-    // if ()
-
-  },
-
   gambleOnColor: function () {
     const self = this
     const pass = function() {
@@ -273,7 +265,7 @@ const App = {
     }
     
     if (pass) {
-      self.getRandomNumber()
+      //self.getRandomNumber()
       self.gambleOnRed()
     }
   },
@@ -285,7 +277,7 @@ const App = {
       self.checkExists()
     }
     if (pass) {
-      self.getRandomNumber()
+      //self.getRandomNumber()
       self.evenOddResult()
     }
   },
@@ -296,19 +288,19 @@ const App = {
       self.checkExists()
     }
     if (pass) {
-      self.getRandomNumber()
+      //self.getRandomNumber()
       self.numberResult()
     }
   },
 
-  getRandomNumber: function (num) {
+  getRandomNumber: function (num, betType) {
     const self = this
 
     // let num = Math.floor((Math.random() * 37) + 0);
     // let randRedBlack = Math.floor((Math.random() * 37) + 0)
     
     //var num = parseInt(document.getElementById('casinoNumber').value)
-    console.log("the num is", num)
+    
     //document.getElementById('casinoNumber').innerHTML = num
 
     let color = document.getElementById('casinoRedBlack')
@@ -330,6 +322,23 @@ const App = {
     else {
       document.getElementById('casinoEvenOdd').innerHTML = "Odd"
     }
+
+    console.log("bet type is2222", betType)
+
+
+    if (betType === "color") {
+      self.gambleOnColor()
+    }
+    else if (betType === "number") {
+      self.gambleOnNum()
+    }
+    else if (betType === "evenOdd") {
+      self.gambleEvenOdd()
+    }
+    else {
+      alert("you didn't gamble on anything")
+    }
+
 
     //self.checkResults(color)
 

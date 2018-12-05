@@ -170,6 +170,35 @@
                 // -------------------------------------------------------
                 // Function to handle the onClick on the power buttons.
                 // -------------------------------------------------------
+                
+                function checkInput() {
+                  const bet = parseInt(document.getElementById('bettorBet').value)
+                  const bettorNumber = parseInt(document.getElementById('bettorNumber').value)
+                  var bettorColor = document.getElementById('bettorColor').value
+                  var bettorEvenOdd = document.getElementById('bettorEvenOdd').value
+
+                  bettorColor = bettorColor.toUpperCase().replace( /^\s+|\s+$/g, '' );
+                  bettorEvenOdd = bettorEvenOdd.toUpperCase().replace( /^\s+|\s+$/g, '' );
+
+
+                  if (bet <= 0 || bet === null) {
+                    // alert("Must bet more than 0");
+                    return false;
+                  }
+                  if (bettorNumber <= 36 || bettorNumber >= 0) {
+                    return "number";
+                  }
+                  if (bettorColor === "RED" || bettorColor === "BLACK") {
+                    return "color";
+                  }
+                  if (bettorEvenOdd === "EVEN" || bettorEvenOdd === "ODD") {
+                    return "evenOdd";
+                  }
+                  return false;
+
+                  
+                }
+
                 function powerSelected(powerLevel)
                 {
                     // Ensure that power can't be changed while wheel is spinning.
@@ -203,7 +232,8 @@
                 // Click handler for spin button.
                 // -------------------------------------------------------
                 function startSpin()
-                {
+                {                    
+                    
                     // Ensure that spinning can't be clicked again while already running.
                     if (wheelSpinning == false)
                     {
@@ -230,6 +260,9 @@
                         // the current animation. The user will have to reset before spinning again.
                         wheelSpinning = true;
                     }
+                    else {
+                      alert("INVALID");
+                    } 
                 }
                 // -------------------------------------------------------
                 // Function for reset button.
@@ -251,9 +284,16 @@
                 function alertPrize(indicatedSegment)
                 {
                     // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
+                    
+                    var winningSegmentNumber = theWheel.getIndicatedSegmentNumber();
+                    theWheel.segments[winningSegmentNumber].fillStyle = '#0198e1';
+                    theWheel.draw();
+                    // drawColourTriangle();
+
                     alert("You have won " + indicatedSegment.text);
+                    const betType = checkInput();
                     document.getElementById('casinoNumber').innerHTML = indicatedSegment.text
-                    App.getRandomNumber(parseInt(indicatedSegment.text));
+                    App.getRandomNumber(parseInt(indicatedSegment.text), betType);
 
                 }
 
