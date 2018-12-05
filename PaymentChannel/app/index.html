@@ -18,6 +18,26 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
   <!-- end wheel of spin -->
 
+  <style>
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button2 {background-color: #008CBA;} /* Blue */
+  .button3 {background-color: #f44336;} /* Red */ 
+  .button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+  .button5 {background-color: #555555;} /* Black */
+  </style>
+
 </head>
 <body> 
     
@@ -91,9 +111,9 @@
 
 
   
-  <button id="gambleOnColor" onclick="App.gambleOnColor()">Gamble on Color</button>
-  <button id="gambleOnEvenOdd" onclick="App.gambleEvenOdd()">Gamble on Even or Odd</button>
-  <button id="gambleOnNumber" onclick="App.gambleOnNum()">Gamble on Number</button>
+  <button id="gambleOnColor" class="button button4"  onclick="App.gambleOnColor()">Gamble on Color</button>
+  <button id="gambleOnEvenOdd" class="button button4" onclick="App.gambleEvenOdd()">Gamble on Even or Odd</button>
+  <button id="gambleOnNumber" class="button button4" onclick="App.gambleOnNum()">Gamble on Number</button>
   <h3>The number is <span class="black"><span id="casinoNumber"></span> <span id="casinoEvenOdd"></span> <span id="casinoRedBlack"></span></span></h3> 
 
   <label for="bettorColor">Color </label><input type="text" id="bettorColor" placeholder="Red || Black">
@@ -110,35 +130,32 @@
   <br>
 
 
-<button id="getBettorBalance" onclick="App.getBettorBalance()">See Bettor Balance</button>
+<button id="getBettorBalance" class="button button4" onclick="App.getBettorBalance()">See Bettor Balance</button>
   <h3>The balance is <span class="black"><span id="gambler"></span></h3> 
 <br>
-<button id="getBettorBalance" onclick="App.getCasinoBalance()">See Casino Balance</button>
+<button id="getBettorBalance" class="button button4" onclick="App.getCasinoBalance()">See Casino Balance</button>
   <h3>The balance of the Casino is <span class="black"><span id="casino"></span></h3> 
 <br>
 <br>
-  <button id="getBettorBalance" onclick="App.addFunds()">Send 2.5 Ether</button>
+  <button id="getBettorBalance" class="button button4" onclick="App.addFunds()">Send 2.5 Ether</button>
   <br>
   <br><br><br>
 
   <label for="ether">Ether </label><input type="text" id="ether" placeholder="Ether">
   <br>
-  <button id="convertToWei" onclick="App.convertToWei()">Convert to Wei</button>
+  <button id="convertToWei" class="button button4" onclick="App.convertToWei()">Convert to Wei</button>
     <h3>Amount in Wei <span class="black"><span id="wei"></span></
 <br><br>
 <br>
-  <button id="getContractAddress" onclick="App.getContractAddress()">Get Contract Address</button>
+  <button id="getContractAddress" class="button button4" onclick="App.getContractAddress()">Get Contract Address</button>
   <h3>The contract address is <span class="black"><span id="contractAddress"></span></h3> 
 
   <br><br>
-  <h1>Withdraw Funds</h1>
+  <h2>Withdraw Funds</h2>
   <br>
   <label for="withdraw">Amount in Wei to Withdraw</label><input type="text" id="withdraw">
-  <button id="withdrawFunds" onclick="App.withdrawFunds()">Withdraw Funds</button>
+  <button id="withdrawFunds" class="button button4" onclick="App.withdrawFunds()">Withdraw Funds</button>
 
-<br><br><br>
-<h1>Gambling Off Chain Now</h1>
-<h2>Hopefully this will work</h2>
   
   <br><br><br>
 
@@ -147,6 +164,7 @@
   <br>
   <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
   <br><br>
+
 
   <!-- spin wheel js -->
   <script>

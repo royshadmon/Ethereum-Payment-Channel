@@ -135,7 +135,7 @@ const App = {
 
   withdrawFunds: function () {
     const self = this
-    let amount = parseInt(document.getElementById('withdraw').value)
+    let amount = parseFloat(document.getElementById('withdraw').value)
     let gamble 
     Gamble.deployed().then(function (instance) {
       gamble = instance
@@ -153,7 +153,7 @@ const App = {
   gambleOnRed: function () {
     self = this
     const color = document.getElementById('casinoRedBlack').innerText
-    const bet = parseInt(document.getElementById('bettorBet').value)
+    const bet = parseFloat(document.getElementById('bettorBet').value)
     const casinoNumber = document.getElementById('casinoNumber').innerText
     var win
     if (casinoNumber === 0) {
@@ -183,7 +183,7 @@ const App = {
   evenOddResult: function () {
     self = this
     const evenOrOdd = document.getElementById('casinoEvenOdd').innerText
-    const bet = parseInt(document.getElementById('bettorBet').value)
+    const bet = parseFloat(document.getElementById('bettorBet').value)
     const casinoNumber = document.getElementById('casinoNumber').innerText
     var win
     if (casinoNumber === 0) {
@@ -221,7 +221,7 @@ const App = {
   numberResult: function () {
     self = this
     const casinoNumber = document.getElementById('casinoNumber').innerText
-    const bet = parseInt(document.getElementById('bettorBet').value)
+    const bet = parseFloat(document.getElementById('bettorBet').value)
     var win
     if (casinoNumber === 0) {
       win = false
