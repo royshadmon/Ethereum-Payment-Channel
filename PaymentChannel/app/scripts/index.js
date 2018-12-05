@@ -211,6 +211,13 @@ const App = {
 
   },
 
+  convertToWei: function () {
+    self = this
+    const eth = parseFloat(document.getElementById('ether').value)
+    var wei = document.getElementById('wei')
+    wei.innerHTML = eth * Math.pow(10, 18)
+  },
+
   numberResult: function () {
     self = this
     const casinoNumber = document.getElementById('casinoNumber').innerText

@@ -119,6 +119,14 @@
 <br>
   <button id="getBettorBalance" onclick="App.addFunds()">Send 2.5 Ether</button>
   <br>
+  <br><br><br>
+
+  <label for="ether">Ether </label><input type="text" id="ether" placeholder="Ether">
+  <br>
+  <button id="convertToWei" onclick="App.convertToWei()">Convert to Wei</button>
+    <h3>Amount in Wei <span class="black"><span id="wei"></span></
+<br><br>
+<br>
   <button id="getContractAddress" onclick="App.getContractAddress()">Get Contract Address</button>
   <h3>The contract address is <span class="black"><span id="contractAddress"></span></h3> 
 
@@ -265,8 +273,8 @@
                 // Click handler for spin button.
                 // -------------------------------------------------------
                 function startSpin()
-                {                    
-                    
+                {                                                          
+
                     // Ensure that spinning can't be clicked again while already running.
                     if (wheelSpinning == false)
                     {
