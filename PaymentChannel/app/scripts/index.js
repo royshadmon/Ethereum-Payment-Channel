@@ -157,7 +157,7 @@ const App = {
     const casinoNumber = document.getElementById('casinoNumber').innerText
     var win
     if (casinoNumber === 0) {
-      win = lose
+      win = false
     }
     else {
       win = this.checkColorResults(color)  
@@ -306,7 +306,7 @@ const App = {
     // let num = Math.floor((Math.random() * 37) + 0);
     // let randRedBlack = Math.floor((Math.random() * 37) + 0)
     
-    //var num = parseInt(document.getElementById('casinoNumber').value)
+    //const num = parseInt(document.getElementById('casinoNumber').value)
     
     //document.getElementById('casinoNumber').innerHTML = num
 
@@ -314,14 +314,18 @@ const App = {
     let color2 = document.getElementById('casinoRedBlack')
 
     // if (randRedBlack % 2 == 0) {
-      if (num % 2 == 0) {
+      if (num % 2 == 0 && num !== 0) {
       color = "Red"
       color2.innerHTML = "Red"
-    }
-    else {
-      color = "Black"
-      color2.innerHTML = "Black"
-    }
+      }
+      else if (num === 0) {
+        color = "Green"
+        color2.innerHTML = "Green"
+      }
+      else {
+        color = "Black"
+        color2.innerHTML = "Black"
+      }
 
     if (num % 2 == 0) {
       document.getElementById('casinoEvenOdd').innerHTML = "Even"
@@ -329,8 +333,6 @@ const App = {
     else {
       document.getElementById('casinoEvenOdd').innerHTML = "Odd"
     }
-
-    console.log("bet type is2222", betType)
 
 
     if (betType === "color") {

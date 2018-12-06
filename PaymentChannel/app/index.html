@@ -118,10 +118,10 @@
 
   <label for="bettorColor">Color </label><input type="text" id="bettorColor" placeholder="Red || Black">
   <br>
-  <label for="bettorEvenOdd">Even or Odd </label><input type="text" id="bettorEvenOdd">
+  <label for="bettorEvenOdd">Even or Odd </label><input type="text" id="bettorEvenOdd" placeholder="Even || Odd">
   <br>
 
-  <label for="bettorNumber">Number </label><input type="text" id="bettorNumber">
+  <label for="bettorNumber">Number </label><input type="text" id="bettorNumber"placeholder="0-36">
   <br>
   <label for="bettorBet">Amount to bet </label><input type="text" id="bettorBet" placeholder="Wei">
 
@@ -231,7 +231,7 @@
                 // -------------------------------------------------------
                 
                 function checkInput() {
-                  const bet = parseInt(document.getElementById('bettorBet').value)
+                  const bet = parseFloat(document.getElementById('bettorBet').value)
                   const bettorNumber = parseInt(document.getElementById('bettorNumber').value)
                   var bettorColor = document.getElementById('bettorColor').value
                   var bettorEvenOdd = document.getElementById('bettorEvenOdd').value
@@ -292,7 +292,11 @@
                 // -------------------------------------------------------
                 function startSpin()
                 {                                                          
-
+                    const betType = checkInput();                  
+                    if (betType === false) {
+                      alert("you didn't make a valid bet")
+                    }
+                    else {
                     // Ensure that spinning can't be clicked again while already running.
                     if (wheelSpinning == false)
                     {
@@ -322,6 +326,7 @@
                     else {
                       alert("INVALID");
                     } 
+                  }
                 }
                 // -------------------------------------------------------
                 // Function for reset button.
@@ -344,7 +349,7 @@
                 {
                     // Do basic alert of the segment text. You would probably want to do something more interesting with this information.                                      
 
-                    alert("You have won " + indicatedSegment.text);
+                    //alert("You have won " + indicatedSegment.text);
                     const betType = checkInput();
                     document.getElementById('casinoNumber').innerHTML = indicatedSegment.text
                     App.getRandomNumber(parseInt(indicatedSegment.text), betType);
