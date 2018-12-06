@@ -51,7 +51,7 @@ const App = {
         return
       }
       accounts = accs
-      account = accounts[0]
+      account = accounts[1]
       //self.refreshBalance()
     })
 
@@ -62,13 +62,15 @@ const App = {
   addFunds: function () {
     const self = this 
 
-    let amount = 2500000000000000000
+    var amount = parseFloat(document.getElementById('sendEther').value)
+    console.log("amount is", amount)
+    const total = self.convertFundsToWei(amount)
     let gamble
-
+    console.log("total is", total)
     Gamble.deployed().then(function (instance) {
       gamble = instance
       console.log(gamble)
-      return gamble.addFunds( {from: account, value: 2500000000000000000})
+      return gamble.addFunds( {from: account, value: total})
     }).then(function (value) {
       self.getBettorBalance()
       self.getCasinoBalance()
@@ -215,7 +217,12 @@ const App = {
     self = this
     const eth = parseFloat(document.getElementById('ether').value)
     var wei = document.getElementById('wei')
-    wei.innerHTML = eth * Math.pow(10, 18)
+    const total = eth * Math.pow(10, 18)
+    wei.innerHTML = total
+  },
+
+  convertFundsToWei: function (amount) {
+    return parseFloat(amount) * Math.pow(10, 18)
   },
 
   numberResult: function () {
