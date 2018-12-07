@@ -1,4 +1,12 @@
-To start the server:
+Project is still in early development and I wanted to just get things working, so please excuse the code messiness. 
+The branch with the most features is roy/GambleOnChain. 
+
+Install truffle
+Node
+
+To run locally:
+
+git checkout roy/GambleOnChain
 
 Terminal 1:
 cd Ethereum-Payment-Channel/PaymentChannel
@@ -9,9 +17,3 @@ cd Ethereum-Payment-Channel/PaymentChannel
 truffle develop 
 migrate --reset
 
-
-Jihua -> To add your changes
-
-git add .
-git commit -am"[What you did in a message]" 
-git push origin jiahua
