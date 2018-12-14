@@ -3,6 +3,7 @@ var ConvertLib = artifacts.require('./ConvertLib.sol')
 var MetaCoin = artifacts.require('./MetaCoin.sol')
 var SecurePayment = artifacts.require('./SecurePayment.sol')
 var GambleOnChain = artifacts.require('./GambleOnChain.sol')
+var GambleOffChain = artifcats.require('./GambleOffChain')
 var mortal = artifacts.require('./mortal.sol')
 
 
@@ -17,4 +18,5 @@ module.exports = function (deployer) {
   deployer.deploy(SecurePayment)
   deployer.link(mortal, GambleOnChain)
   deployer.deploy(GambleOnChain)
+  deployer.deploy(GambleOffChain)
 }
